@@ -1,0 +1,20 @@
+{
+  "name": "book-exchange",
+  "version": "1.0.0",
+  "description": "The idea is to create an app to exchange books.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lisbethmarianne/js-crash-course.git"
+  },
+  "author": "Katrin Marschner <katrin.marschner@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lisbethmarianne/js-crash-course/issues"
+  },
+  "homepage": "https://github.com/lisbethmarianne/js-crash-course#readme",
+  "dependencies": {}
+}

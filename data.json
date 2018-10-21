@@ -1,0 +1,37 @@
+[
+  {
+    "id": "erica-smith",
+    "name": "Erica Smith",
+    "country": "Germany",
+    "city": "Leipzig",
+    "books": [
+      {
+        "title": "Jane Eyre",
+        "author": "Charlotte Brontë",
+        "ownerId": "erica-smith"
+      },
+      {
+        "title": "Emma",
+        "author": "Jane Austen",
+        "ownerId": "erica-smith"
+      }
+    ],
+    "proposedExchanges": [],
+    "requestedExchanges": []
+  },
+  {
+    "id": "michael-becker",
+    "name": "Michael Becker",
+    "country": "Germany",
+    "city": "Berlin",
+    "books": [
+      {
+        "title": "A Wild Sheep Chase",
+        "author": "Haruki Murakami",
+        "ownerId": "michael-becker"
+      }
+    ],
+    "proposedExchanges": [],
+    "requestedExchanges": []
+  }
+]
