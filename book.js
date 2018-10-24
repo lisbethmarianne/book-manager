@@ -4,4 +4,8 @@ module.exports = class Book {
     this.author = author
     this.ownerId = ownerId
   }
+
+  static create({title, author, ownerId}) {
+    return new Book(title, author, ownerId)
+  }
 }

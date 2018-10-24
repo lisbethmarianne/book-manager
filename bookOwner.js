@@ -12,20 +12,26 @@ module.exports = class BookOwner {
     this.requestedExchanges = []
   }
 
+  static create({ name, country, city, books }) {
+    const bookOwner = new BookOwner(name, country, city)
+    bookOwner.books = books.map(Book.create)
+    return bookOwner
+  }
+
   addBook(title, author) {
     const book = new Book(title, author, this.id)
 
     this.books.push(book)
   }
 
-  requestExchange(requestee, requestedBook, offeredBook) { 
+  requestExchange(requestee, requestedBook, offeredBook) {
     const bookExchange = new BookExchange(this, requestee, requestedBook, offeredBook)
 
     this.proposedExchanges.push(bookExchange)
     requestee.requestedExchanges.push(bookExchange)
   }
 
-  acceptExchange(exchange) { 
+  acceptExchange(exchange) {
     exchange.accepted = true
     exchange.complete()
   }

@@ -17,8 +17,8 @@ const BookOwner = require('./bookOwner')
 
 const data = Database.load()
 
-const erica = Object.assign(new BookOwner(), data.find( owner => owner.id === 'erica-smith' ))
-const michael = Object.assign(new BookOwner(), data.find( owner => owner.id === 'michael-becker' ))
+const erica = BookOwner.create(data.find( owner => owner.id === 'erica-smith' ))
+const michael = BookOwner.create(data.find( owner => owner.id === 'michael-becker' ))
 
 console.log(`${erica.name}'s books: ${erica.books.map(book => book.title).join(', ')}`)
 console.log(`${michael.name}'s books: ${michael.books.map(book => book.title).join(', ')}`)
