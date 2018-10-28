@@ -1,25 +1,20 @@
-const Database = require('./database')
-const BookOwner = require('./bookOwner')
-
-// Code to generate data in data.json:
-
-// const bookOwners = []
-// const erica = new BookOwner("Erica Smith", "Germany", "Leipzig")
-// const michael = new BookOwner("Michael Becker", "Germany", "Berlin")
-// bookOwners.push(erica)
-// bookOwners.push(michael)
-
-// erica.addBook("Jane Eyre", "Charlotte Brontë")
-// erica.addBook("Emma", "Jane Austen")
-// michael.addBook("A Wild Sheep Chase", "Haruki Murakami")
-
-// Database.save('data.json', [erica, michael])
+const BookOwnerService = require('./bookOwnerService')
+const BookOwner = require('./models/bookOwner')
 
 const main = async () => {
-  const data = await Database.load('data.json')
+  // Code to generate data
+  // const firstBookOwner = new BookOwner("Erica Smith", "Germany", "Leipzig")
+  // const secondBookOwner = new BookOwner("Michael Becker", "Germany", "Berlin")
+  // firstBookOwner.addBook("Jane Eyre", "Charlotte Brontë")
+  // firstBookOwner.addBook("Emma", "Jane Austen")
+  // secondBookOwner.addBook("A Wild Sheep Chase", "Haruki Murakami")
 
-  const erica = BookOwner.create(data.find( owner => owner.id === 'erica-smith' ))
-  const michael = BookOwner.create(data.find( owner => owner.id === 'michael-becker' ))
+  // await BookOwnerService.add(firstBookOwner)
+  // await BookOwnerService.add(secondBookOwner)
+
+  // Work with data from database
+  const erica = await BookOwnerService.find('erica-smith')
+  const michael = await BookOwnerService.find('michael-becker')
 
   console.log(`${erica.name}'s books: ${erica.books.map(book => book.title).join(', ')}`)
   console.log(`${michael.name}'s books: ${michael.books.map(book => book.title).join(', ')}`)
@@ -36,6 +31,9 @@ const main = async () => {
 
   console.log(`${erica.name}'s books: ${erica.books.map(book => book.title).join(', ')}`)
   console.log(`${michael.name}'s books: ${michael.books.map(book => book.title).join(', ')}`)
+
+  await BookOwnerService.update(erica)
+  await BookOwnerService.update(michael)
 }
 
 (async () => {
