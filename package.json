@@ -16,5 +16,9 @@
     "url": "https://github.com/lisbethmarianne/js-crash-course/issues"
   },
   "homepage": "https://github.com/lisbethmarianne/js-crash-course#readme",
-  "dependencies": {}
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "pug": "^2.0.3"
+  }
 }

@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 Book Owners
+  each owner in owners
+    a(href='/owners/' + owner.id) #{owner.name}
+    - var books = owner.books
+    each book in books
+      li #{book.title}
+
+  br
+  p Register as a book owner 
+    a(href='/owners/new') here

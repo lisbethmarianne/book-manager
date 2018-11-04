@@ -12,7 +12,7 @@ module.exports = class BookOwner {
     this.requestedExchanges = []
   }
 
-  static create({ name, country, city, books }) {
+  static create({ name, country, city, books=[] }) {
     const bookOwner = new BookOwner(name, country, city)
     bookOwner.books = books.map(Book.create)
     return bookOwner

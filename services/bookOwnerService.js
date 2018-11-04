@@ -1,8 +1,8 @@
 const fs = require('fs')
 
-const BookOwner = require('./models/bookOwner')
+const BookOwner = require('../models/bookOwner')
 
-const dbPath = `${__dirname}/book-owner-database.json`
+const dbPath = `${__dirname}/../book-owner-database.json`
 
 async function findAll() {
   return new Promise((resolve, reject) => {
@@ -54,8 +54,20 @@ async function update(bookOwner) {
   return bookOwner
 }
 
+async function del(ownerId) {
+  const allBookOwners = await findAll()
+  const ownerIndex = allBookOwners.findIndex(p => p.id == ownerId)
+  if (ownerIndex < 0) return
+
+  allBookOwners.splice(ownerIndex, 1)
+
+  saveAll(allBookOwners)
+}
+
 module.exports = {
-  find,
   add,
+  del,
+  find,
+  findAll,
   update,
 }
