@@ -1,73 +1,36 @@
-const fs = require('fs')
-
 const BookOwner = require('../models/bookOwner')
-
-const dbPath = `${__dirname}/../book-owner-database.json`
+const Book = require('../models/book')
 
 async function findAll() {
-  return new Promise((resolve, reject) => {
-    fs.readFile(dbPath, 'utf8', (err, file) => {
-      if (err) return reject(err)
-
-      const bookOwners = JSON.parse(file).map(BookOwner.create)
-
-      resolve(bookOwners)
-    })
-  })
+  return BookOwner.find()
 }
 
-async function saveAll(bookOwners) {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(dbPath, JSON.stringify(bookOwners), (err) => {
-      if (err) return reject(err)
-
-      resolve()
-    })
-  })
+async function add(meetup) {
+  return BookOwner.create(meetup)
 }
 
-async function find(ownerId) {
-  const allBookOwners = await findAll()
-
-  return allBookOwners.find(bookOwner => bookOwner.id == ownerId)
+async function del(_id) {
+  return BookOwner.remove({ _id })
 }
 
-async function add(bookOwner) {
-  const allBookOwners = await findAll()
+async function find(_id) {
+  return BookOwner.findOne({ _id })
+}
 
-  bookOwner = BookOwner.create(bookOwner)
-  allBookOwners.push(bookOwner)
+async function addBook(bookOwnerId, bookId) {
+  const bookOwner = await BookOwner.findOne({ _id: bookOwnerId })
+  const book = await Book.findOne({ _id: bookId })
 
-  await saveAll(allBookOwners)
+  bookOwner.books.push(book._id)
 
+  bookOwner.save()
   return bookOwner
-}
-
-async function update(bookOwner) {
-  const allBookOwners = await findAll()
-  const bookOwnerIndex = allBookOwners.findIndex(p => p.id == bookOwner.id)
-
-  allBookOwners[bookOwnerIndex] = BookOwner.create(bookOwner)
-
-  await saveAll(allBookOwners)
-
-  return bookOwner
-}
-
-async function del(ownerId) {
-  const allBookOwners = await findAll()
-  const ownerIndex = allBookOwners.findIndex(p => p.id == ownerId)
-  if (ownerIndex < 0) return
-
-  allBookOwners.splice(ownerIndex, 1)
-
-  saveAll(allBookOwners)
 }
 
 module.exports = {
+  findAll,
+  find,
   add,
   del,
-  find,
-  findAll,
-  update,
+  addBook
 }

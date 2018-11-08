@@ -2,6 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 const BookOwnerService = require('./services/bookOwnerService')
+const BookService = require('./services/bookService')
+
+require('./mongo-connection')
 
 const app = express()
 
@@ -28,14 +31,15 @@ app.get('/owners/new', async (_, res) => {
 
 app.get('/owners/:id', async (req, res) => {
   const owner = await BookOwnerService.find(req.params.id)
+  const books = await BookService.findForOwner(owner._id)
 
-  res.render('owner', { owner })
+  res.render('owner', { owner, books })
 })
 
 app.post('/owners', async (req, res) => {
   const owner = await BookOwnerService.add(req.body)
 
-  res.render('owner', { owner })
+  res.redirect(`/owners/${owner._id}`)
 })
 
 app.delete('/owners/:id', async (req, res) => {
@@ -46,9 +50,9 @@ app.delete('/owners/:id', async (req, res) => {
 
 app.post('/owners/:id/books', async (req, res) => {
   const owner = await BookOwnerService.find(req.params.id)
+  const book = await BookService.add(Object.assign(req.body, { ownerId: owner._id }))
 
-  owner.addBook(req.body.title, req.body.author)
-  await BookOwnerService.update(owner)
+  await BookOwnerService.addBook(owner._id, book._id)
 
-  res.render('owner', { owner })
+  res.redirect(`/owners/${owner._id}`)
 })

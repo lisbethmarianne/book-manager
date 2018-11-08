@@ -4,7 +4,7 @@ block content
   h1 #{owner.name}
   p from #{owner.city}, #{owner.country}
   h2 Available Books
-  each book in owner.books
+  each book in books
     li #{book.author}: #{book.title}
 
   br

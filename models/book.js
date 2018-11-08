@@ -1,11 +1,18 @@
-module.exports = class Book {
-  constructor(title, author, ownerId) {
-    this.title = title
-    this.author = author
-    this.ownerId = ownerId
-  }
+const mongoose = require('mongoose')
 
-  static create({title, author, ownerId}) {
-    return new Book(title, author, ownerId)
+const BookSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    require: true
+  },
+  author: {
+    type: String,
+    require: true
+  },
+  ownerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'BookOwner'
   }
-}
+})
+
+module.exports = mongoose.model('Book', BookSchema)

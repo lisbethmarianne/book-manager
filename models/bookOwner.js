@@ -1,38 +1,16 @@
-const Book = require('./book')
-const BookExchange = require('./bookExchange')
+const mongoose = require('mongoose')
 
-module.exports = class BookOwner {
-  constructor(name, country, city) {
-    this.id = name ? name.replace(/\s+/g, '-').toLowerCase() : null
-    this.name = name
-    this.country = country
-    this.city = city
-    this.books = []
-    this.proposedExchanges = []
-    this.requestedExchanges = []
-  }
+const BookOwnerSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    require: true
+  },
+  city: String,
+  country: String,
+  books: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Book'
+  }]
+})
 
-  static create({ name, country, city, books=[] }) {
-    const bookOwner = new BookOwner(name, country, city)
-    bookOwner.books = books.map(Book.create)
-    return bookOwner
-  }
-
-  addBook(title, author) {
-    const book = new Book(title, author, this.id)
-
-    this.books.push(book)
-  }
-
-  requestExchange(requestee, requestedBook, offeredBook) {
-    const bookExchange = new BookExchange(this, requestee, requestedBook, offeredBook)
-
-    this.proposedExchanges.push(bookExchange)
-    requestee.requestedExchanges.push(bookExchange)
-  }
-
-  acceptExchange(exchange) {
-    exchange.accepted = true
-    exchange.complete()
-  }
-}
+module.exports = mongoose.model('BookOwner', BookOwnerSchema)
