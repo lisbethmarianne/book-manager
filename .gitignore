@@ -1,4 +1,5 @@
 /node_modules
 /week*
-.vscode/
 /testing
+.vscode/
+.nyc_output/

@@ -23,7 +23,8 @@ app.listen(3000, () => {
 app.get('/companies', async (_, res) => {
   const companies = await CompanyService.findAll()
 
-  res.render('companies', { companies })
+  // res.render('companies', { companies })
+  res.send(companies)
 })
 
 app.get('/companies/new', async (_, res) => {
@@ -85,3 +86,5 @@ app.post('/books/:id/read', async (req, res) => {
 
   res.redirect(`/books/${book._id}`)
 })
+
+module.exports = app
