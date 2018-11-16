@@ -1,8 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 
-const BookOwnerService = require('./services/bookOwnerService')
+const CompanyService = require('./services/companyService')
 const BookService = require('./services/bookService')
+const EmployeeService = require('./services/employeeService')
 
 require('./mongo-connection')
 
@@ -19,40 +20,68 @@ app.listen(3000, () => {
   console.log('Server listening')
 })
 
-app.get('/owners', async (_, res) => {
-  const owners = await BookOwnerService.findAll()
+app.get('/companies', async (_, res) => {
+  const companies = await CompanyService.findAll()
 
-  res.render('owners', { owners })
+  res.render('companies', { companies })
 })
 
-app.get('/owners/new', async (_, res) => {
+app.get('/companies/new', async (_, res) => {
   res.render('new')
 })
 
-app.get('/owners/:id', async (req, res) => {
-  const owner = await BookOwnerService.find(req.params.id)
-  const books = await BookService.findForOwner(owner._id)
+app.get('/companies/:id', async (req, res) => {
+  const company = await CompanyService.find(req.params.id)
+  const books = await BookService.findForOwner(company._id)
+  const employees = await EmployeeService.findForCompany(company._id)
 
-  res.render('owner', { owner, books })
+  res.render('company', { company, books, employees })
 })
 
-app.post('/owners', async (req, res) => {
-  const owner = await BookOwnerService.add(req.body)
+app.post('/companies', async (req, res) => {
+  const company = await CompanyService.add(req.body)
 
-  res.redirect(`/owners/${owner._id}`)
+  res.redirect(`/companies/${company._id}`)
 })
 
-app.delete('/owners/:id', async (req, res) => {
-  await BookOwnerService.del(req.params.id)
+app.delete('/companies/:id', async (req, res) => {
+  await CompanyService.del(req.params.id)
 
   res.send('ok')
 })
 
-app.post('/owners/:id/books', async (req, res) => {
-  const owner = await BookOwnerService.find(req.params.id)
-  const book = await BookService.add(Object.assign(req.body, { ownerId: owner._id }))
+app.post('/companies/:id/books', async (req, res) => {
+  const company = await CompanyService.find(req.params.id)
+  const book = await BookService.add(Object.assign(req.body, { ownerId: company._id }))
 
-  await BookOwnerService.addBook(owner._id, book._id)
+  await CompanyService.addBook(company._id, book._id)
 
-  res.redirect(`/owners/${owner._id}`)
+  res.redirect(`/companies/${company._id}`)
+})
+
+app.post('/companies/:id/employees', async (req, res) => {
+  const company = await CompanyService.find(req.params.id)
+  const employee = await EmployeeService.add(Object.assign(req.body, { companyId: company._id }))
+
+  await CompanyService.addEmployee(company._id, employee._id)
+
+  res.redirect(`/companies/${company._id}`)
+})
+
+// Books
+
+app.get('/books/:id', async (req, res) => {
+  const book = await BookService.find(req.params.id)
+  const employees = await EmployeeService.findForCompany(book.ownerId)
+  const reader = await EmployeeService.find(book.reader)
+
+  res.render('book', { book, reader, employees })
+})
+
+app.post('/books/:id/read', async (req, res) => {
+  const book = await BookService.find(req.params.id)
+
+  await BookService.addReader(book._id, req.body.employeeId)
+
+  res.redirect(`/books/${book._id}`)
 })

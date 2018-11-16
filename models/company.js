@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const BookOwnerSchema = new mongoose.Schema({
+const CompanySchema = new mongoose.Schema({
   name: {
     type: String,
     require: true
@@ -10,7 +10,11 @@ const BookOwnerSchema = new mongoose.Schema({
   books: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book'
+  }],
+  employees: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Employee'
   }]
 })
 
-module.exports = mongoose.model('BookOwner', BookOwnerSchema)
+module.exports = mongoose.model('Company', CompanySchema)

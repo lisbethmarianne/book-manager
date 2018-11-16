@@ -1,14 +1,14 @@
 # js-crash-course
 
-The idea is to create an app to exchange books. 
+The idea is to create an app to manage company books.
 
 Classes
+- Company
 - Book
-- BookOwner
-- BookExchange
+- Employee
 
 Logic
-- A book belongs to a book owner.
-- A book owner has many books. (A book owner can add a book.)
-- A book owner can have many requests for book exchanges. (A book owner can accept a bookExchange.)
-- A book owner can make many requests for book exchanges. (A book owner can request a bookExchange.)
+- A book belongs to a company.
+- A company has many books.
+- A company has many employees.
+- A book can have a reader. (A reader is an employee.)

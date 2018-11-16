@@ -11,7 +11,11 @@ const BookSchema = new mongoose.Schema({
   },
   ownerId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'BookOwner'
+    ref: 'Company'
+  },
+  reader: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Employee'
   }
 })
 
