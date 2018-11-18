@@ -1,27 +1,23 @@
 const Book = require('../models/book')
 const Employee = require('../models/employee')
 
-async function findAll() {
-  return Book.find()
-}
-
-async function find(_id) {
+async function find (_id) {
   return Book.findOne({ _id })
 }
 
-async function findForOwner(ownerId) {
+async function findForOwner (ownerId) {
   return Book.find({ ownerId: ownerId })
 }
 
-async function add(book) {
+async function add (book) {
   return Book.create(book)
 }
 
-async function del(_id) {
+async function del (_id) {
   return Book.remove({ _id })
 }
 
-async function addReader(_id, employeeId) {
+async function addReader (_id, employeeId) {
   const book = await Book.findOne({ _id: _id })
   const employee = await Employee.findOne({ _id: employeeId })
 
@@ -32,7 +28,6 @@ async function addReader(_id, employeeId) {
 }
 
 module.exports = {
-  findAll,
   find,
   findForOwner,
   add,
