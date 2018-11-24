@@ -15,7 +15,7 @@ async function del (_id) {
 }
 
 async function find (_id) {
-  return Company.findOne({ _id })
+  return Company.findOne({ _id }).populate('books').populate('employees')
 }
 
 async function addBook (companyId, bookId) {

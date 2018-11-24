@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const CompanyService = require('./services/companyService')
 const BookService = require('./services/bookService')
@@ -8,6 +9,7 @@ const EmployeeService = require('./services/employeeService')
 require('./mongo-connection')
 
 const app = express()
+app.use(cors())
 app.set('view engine', 'pug')
 app.use(bodyParser.json())
 
