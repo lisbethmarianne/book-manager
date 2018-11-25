@@ -9,6 +9,9 @@ const BookSchema = new mongoose.Schema({
     type: String,
     require: true
   },
+  image: {
+    type: String
+  },
   ownerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Company'

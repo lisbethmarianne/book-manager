@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Company from './views/Company.vue'
 import Companies from './views/Companies.vue'
+import Book from './views/Book.vue'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/companies/:id',
       name: 'company',
       component: Company
+    },
+    {
+      path: '/books/:id',
+      name: 'book',
+      component: Book
     }
   ]
 })
