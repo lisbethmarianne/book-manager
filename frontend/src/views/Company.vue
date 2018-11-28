@@ -2,10 +2,15 @@
 import { mapActions, mapState } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 
+import BookCard from '@/components/BookCard.vue'
+
 export default {
   name: 'company',
   created () {
     this.fetchCompany(this.$route.params.id)
+  },
+  components: {
+    BookCard
   },
   computed: {
     ...mapState({
@@ -33,11 +38,11 @@ export default {
 
     <div v-if="company.books">
       <h2>Books</h2>
-      <ul class='book_list' v-for="book in company.books" :key="book._id">
-        <img class='book_image' :src='book.image'>
-        <li class='book_list-item'>{{ book.author }}: {{ book.title }}</li>
-        <a :href="`/books/${book._id}`">View</a>
-      </ul>
+      <div class='book_list'>
+        <div v-for="book in company.books" :key='book._id'>
+          <BookCard :book='book' />
+        </div>
+      </div>
     </div>
 
     <div class='create-book'>
@@ -69,14 +74,10 @@ export default {
 }
 
 .book_list {
-  padding: 0;
+  display: flex;
 }
 
 .book_list-item {
   list-style: none;
-}
-
-.book_image {
-  width: 50px;
 }
 </style>

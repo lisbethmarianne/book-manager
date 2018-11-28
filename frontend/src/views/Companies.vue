@@ -4,7 +4,7 @@ import { mapFields } from 'vuex-map-fields'
 
 export default {
   name: 'companies',
-  created() {
+  created () {
     this.fetchCompanies(this.$route.params.id)
   },
   computed: {

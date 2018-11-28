@@ -20,8 +20,12 @@ export default {
 <template>
   <div class="book">
     <h1>{{book.author}}: {{book.title}}</h1>
+    <img class='cover' :src='book.image'>
   </div>
 </template>
 
 <style lang="scss">
+.cover {
+  width: 200px;
+}
 </style>
