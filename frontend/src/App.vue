@@ -1,11 +1,10 @@
-
 <template>
-  <div id="app">
-    <div id="nav">
+  <div class="container" id="app">
+    <nav id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/companies">Companies</router-link>
-    </div>
+      <router-link to="/companies">Sign up</router-link>
+    </nav>
     <router-view/>
   </div>
 </template>
@@ -28,5 +27,9 @@
       color: #33C3F0;
     }
   }
+}
+
+label {
+  text-align: left;
 }
 </style>

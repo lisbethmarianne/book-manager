@@ -101,6 +101,7 @@ section {
 .book_list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .employee_list {
@@ -115,8 +116,11 @@ section {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   padding: 20px;
   width: 250px;
-  height: 300px;
+  height: 350px;
   margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .employee {

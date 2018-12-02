@@ -1,8 +1,9 @@
 import Vue from 'vue'
+import vSelect from 'vue-select'
+
 import App from './App.vue'
 import router from './router'
 import store from './store/index.js'
-import vSelect from 'vue-select'
 
 import './assets/normalize.css'
 import './assets/skeleton.css'

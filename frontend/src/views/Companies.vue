@@ -29,26 +29,29 @@ export default {
 
 <template>
   <div class="companies">
-    <div class='create-company'>
-      <div class="form-element">
-        <label>
-          Name <input type='text' class='input' v-model="company.name">
-        </label>
+    <form class='create-company'>
+      <div class="row">
+        <div class="six columns offset-by-three">
+          <label>Name</label>
+          <input type='text' class='input u-full-width' v-model="company.name">
+        </div>
       </div>
-      <div class="form-element">
-        <label>
-          City <input type='text' class='input' v-model="company.city">
-        </label>
+      <div class="row">
+        <div class="three columns offset-by-three">
+          <label>City</label>
+          <input type='text' class='input u-full-width' v-model="company.city">
+        </div>
+        <div class="three columns">
+          <label>Country</label>
+          <input type='text' class='input u-full-width' v-model="company.country">
+        </div>
       </div>
-      <div class="form-element">
-        <label>
-          Country <input type='text' class='input' v-model="company.country">
-        </label>
+      <div class="row">
+        <button class='button button-primary' @click="createCompany">
+          Add new company
+        </button>
       </div>
-      <button class='button button-primary' @click="createCompany">
-        Add new company
-      </button>
-    </div>
+    </form>
 
     <h4>These companies use the book manager</h4>
     <div v-for="company in companies" :key="company._id">

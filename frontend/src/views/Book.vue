@@ -1,6 +1,5 @@
 <script>
 import { mapActions, mapState } from 'vuex'
-import { mapFields } from 'vuex-map-fields'
 
 export default {
   name: 'book',
@@ -15,7 +14,8 @@ export default {
   },
   methods: {
     ...mapActions(['fetchBook', 'addReader']),
-    setReader(reader) {
+    setReader (reader) {
+      console.log(reader)
       if (reader && reader === this.book.reader) {
         return
       } else {
@@ -29,7 +29,6 @@ export default {
 
 <template>
   <div class="book">
-
     <h1>{{book.author}}: {{book.title}}</h1>
     <img class='cover' :src='book.image'>
     <p>{{book.reader ? book.reader.name : 'Nobody'}} is currently reading this book</p>
@@ -44,7 +43,9 @@ export default {
     </div>
 
     <div class="breadcrumbs">
-      <a :href="`/companies/${book.owner._id}`">See all books at {{book.owner.name}}</a>
+      <div v-if="book.owner !== undefined">
+        <a :href="`/companies/${book.owner._id}`">See all books at {{book.owner.name}}</a>
+      </div>
     </div>
   </div>
 </template>

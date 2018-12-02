@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getField, updateField } from 'vuex-map-fields'
+import { updateField } from 'vuex-map-fields'
 
 const REQUEST_SUCCESS = 'REQUEST_SUCCESS'
 const CREATE_SUCCESS = 'CREATE_SUCCESS'
@@ -11,10 +11,6 @@ const state = {
     city: '',
     country: ''
   }
-}
-
-const getters = {
-  getField
 }
 
 const mutations = {
@@ -47,6 +43,5 @@ const actions = {
 export default {
   state,
   mutations,
-  actions,
-  getters
+  actions
 }
