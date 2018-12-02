@@ -1,6 +1,7 @@
-# js-crash-course
+# Book Manager
 
-The idea is to create an app to manage company books.
+Full stack JavaScript app to manage company books.
+Made during the JS crash course offered by [WTMB](http://wtmberlin.com/).
 
 Classes
 - Company
