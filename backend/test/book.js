@@ -13,7 +13,7 @@ test('Fetch a book', async t => {
   const bookToCreate = {
     author: 'Haruki Murakami',
     title: 'Wild Sheep Chase',
-    ownerId: companyCreated._id
+    owner: companyCreated._id
   }
   const bookCreated = await Book.create(bookToCreate)
 
@@ -32,7 +32,7 @@ test('Delete a book', async t => {
   const bookToCreate = {
     author: 'Haruki Murakami',
     title: 'Wild Sheep Chase',
-    ownerId: companyCreated._id
+    owner: companyCreated._id
   }
   const bookCreated = await Book.create(bookToCreate)
 
@@ -54,7 +54,7 @@ test('A book can have a reader', async t => {
   const bookToCreate = {
     author: 'Haruki Murakami',
     title: 'Wild Sheep Chase',
-    ownerId: companyCreated._id
+    owner: companyCreated._id
   }
   const bookCreated = await Book.create(bookToCreate)
 

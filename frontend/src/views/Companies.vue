@@ -32,27 +32,33 @@ export default {
     <div class='create-company'>
       <div class="form-element">
         <label>
-          Name: <input v-model="company.name">
+          Name <input type='text' class='input' v-model="company.name">
         </label>
       </div>
       <div class="form-element">
         <label>
-          City: <input v-model="company.city">
+          City <input type='text' class='input' v-model="company.city">
         </label>
       </div>
       <div class="form-element">
         <label>
-          Country: <input v-model="company.country">
+          Country <input type='text' class='input' v-model="company.country">
         </label>
       </div>
-      <button @click="createCompany">
+      <button class='button button-primary' @click="createCompany">
         Add new company
       </button>
     </div>
 
-    <h1>These companies use the book manager</h1>
+    <h4>These companies use the book manager</h4>
     <div v-for="company in companies" :key="company._id">
       <a :href="`/companies/${company._id}`">{{ company.name }}</a>
     </div>
   </div>
 </template>
+
+<style>
+.create-company {
+  margin: 50px 0;
+}
+</style>

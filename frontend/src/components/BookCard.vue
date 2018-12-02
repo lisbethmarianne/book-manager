@@ -8,19 +8,16 @@ export default {
 </script>
 
 <template>
-  <div class='book'>
+  <div class='book-card'>
     <img class='book_image' :src='book.image'>
-    <p>{{book.author}}: {{book.title}}</p>
+    <p>{{book.author}}</p>
+    <h5>{{book.title}}</h5>
     <a :href="`/books/${book._id}`">View</a>
   </div>
 </template>
 
-<style>
-.book {
-  margin: 30px;
-}
-
+<style lang="scss">
 .book_image {
-  width: 50px;
+  width: 100px;
 }
 </style>

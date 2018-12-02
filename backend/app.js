@@ -10,14 +10,7 @@ require('./mongo-connection')
 
 const app = express()
 app.use(cors())
-app.set('view engine', 'pug')
 app.use(bodyParser.json())
-
-// Home
-
-app.get('/', (_, res) => {
-  res.render('index')
-})
 
 // Companies
 
@@ -59,7 +52,7 @@ app.get('/companies/:id/employees', async (req, res) => {
 })
 
 app.post('/companies/:id/books', async (req, res) => {
-  const book = await BookService.add(Object.assign(req.body, { ownerId: req.params.id }))
+  const book = await BookService.add(Object.assign(req.body, { owner: req.params.id }))
   const company = await CompanyService.addBook(req.params.id, book._id)
 
   res.send(company)

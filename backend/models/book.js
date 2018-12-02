@@ -12,7 +12,7 @@ const BookSchema = new mongoose.Schema({
   image: {
     type: String
   },
-  ownerId: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Company'
   },

@@ -2,13 +2,17 @@ import axios from 'axios'
 import { getField, updateField } from 'vuex-map-fields'
 
 const REQUEST_SUCCESS = 'REQUEST_SUCCESS'
-const CREATE_SUCCESS = 'CREATE_SUCCESS'
+const CREATE_BOOK_SUCCESS = 'CREATE_BOOK_SUCCESS'
+const CREATE_EMPLOYEE_SUCCESS = 'CREATE_EMPLOYEE_SUCCESS'
 
 const state = {
   data: {},
   book: {
     author: '',
     title: ''
+  },
+  employee: {
+    name: ''
   }
 }
 
@@ -20,10 +24,16 @@ const mutations = {
   [REQUEST_SUCCESS] (state, data) {
     state.data = data
   },
-  [CREATE_SUCCESS] (state, data) {
+  [CREATE_BOOK_SUCCESS] (state, data) {
     state.book = {
       author: '',
       title: ''
+    }
+    state.data = data
+  },
+  [CREATE_EMPLOYEE_SUCCESS] (state, data) {
+    state.employee = {
+      name: ''
     }
     state.data = data
   },
@@ -38,7 +48,12 @@ const actions = {
   async addBook ({ commit, state }, book) {
     await axios.post(`http://localhost:3000/companies/${state.data._id}/books`, book)
     const res = await axios.get(`http://localhost:3000/companies/${state.data._id}`)
-    commit(CREATE_SUCCESS, res.data)
+    commit(CREATE_BOOK_SUCCESS, res.data)
+  },
+  async addEmployee ({ commit, state }, employee) {
+    await axios.post(`http://localhost:3000/companies/${state.data._id}/employees`, employee)
+    const res = await axios.get(`http://localhost:3000/companies/${state.data._id}`)
+    commit(CREATE_EMPLOYEE_SUCCESS, res.data)
   }
 }
 

@@ -77,7 +77,7 @@ test('Get all books for a company', async t => {
   const bookToCreate = {
     author: 'Haruki Murakami',
     title: 'Wild Sheep Chase',
-    ownerId: companyCreated._id
+    owner: companyCreated._id
   }
   await Book.create(bookToCreate)
 

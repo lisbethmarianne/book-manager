@@ -2,11 +2,11 @@ const Book = require('../models/book')
 const Employee = require('../models/employee')
 
 async function find (_id) {
-  return Book.findOne({ _id })
+  return Book.findOne({ _id }).populate('reader').populate('owner')
 }
 
 async function findForOwner (ownerId) {
-  return Book.find({ ownerId: ownerId })
+  return Book.find({ owner: ownerId })
 }
 
 async function add (book) {
@@ -21,7 +21,7 @@ async function addReader (_id, employeeId) {
   const book = await Book.findOne({ _id: _id })
   const employee = await Employee.findOne({ _id: employeeId })
 
-  book.reader = employee._id
+  book.reader = employee ? employee._id : null
   book.save()
 
   return book
